@@ -1,4 +1,5 @@
-# K8 t2.small
+# Kubeadm Cluster installation
+# K8 t2.small, Minimum 2 or more CPU, 3 GB RAM.
 
 cus tcp,: 8080,30080,8085,8081,6379,9000,30443,6443
 http: 80,443
