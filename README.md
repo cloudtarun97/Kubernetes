@@ -63,13 +63,10 @@ net.bridge.bridge-nf-call-ip6tables = 1
 EOF
 ```
 
-```
-sudo modprobe overlay
-```
+``` sudo modprobe overlay```
 
-```
-sudo modprobe br_netfilter
-```
+
+```sudo modprobe br_netfilter```
 
 ```
 cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
@@ -78,7 +75,10 @@ net.ipv4.ip_forward                 = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 EOF
 ```
-```sudo sysctl --system```
+
+```
+sudo sysctl --system
+```
 
 ----------------------------------------------------------------
 Step #4:Install Kubeadm & Kubelet & Kubectl on all Nodes
