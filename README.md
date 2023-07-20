@@ -83,11 +83,14 @@ sudo sysctl --system
 ----------------------------------------------------------------
 Step #4:Install Kubeadm & Kubelet & Kubectl on all Nodes
 
-``` sudo apt-get update```
+```
+sudo apt-get update
 
-```sudo apt-get install -y apt-transport-https curl```
+sudo apt-get install -y apt-transport-https curl
 
-```curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -```
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+```
 
 (add the below line) 
 ```
@@ -99,9 +102,13 @@ Step #4:Install Kubeadm & Kubelet & Kubectl on all Nodes
 sudo apt-get update
 ```
 
-``` sudo apt-get install -y kubelet kubeadm kubectl```
+```
+sudo apt-get install -y kubelet kubeadm kubectl 
+```
 
-``` sudo apt-mark hold kubelet kubeadm kubectl```
+```
+sudo apt-mark hold kubelet kubeadm kubectl 
+```
 
 ------------------------------
 
