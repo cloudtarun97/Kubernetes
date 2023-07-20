@@ -12,79 +12,90 @@ Step #1: IPtables to see bridged traffic
 
 Master and slave 
 
---> 
+```
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
 EOF
+```
 
--> sudo modprobe overlay
+```
+sudo modprobe overlay
+```
 
--> sudo modprobe br_netfilter
+```
+ sudo modprobe br_netfilter
+```
 
--->
+```
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-iptables  = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 net.ipv4.ip_forward                 = 1
 EOF
+```
 
---> sudo sysctl --system 
-
+```
+sudo sysctl --system 
+```
 ------------------------------------------------
 Step #2:Disable swap on all the Nodes
 
--> 
+``` 
 sudo swapoff -a
 (crontab -l 2>/dev/null; echo "@reboot /sbin/swapoff -a") | crontab - || true
-
+```
 ------------------------------------------------
 Step #3:Install CRI-O Runtime On All The Nodes
 
-->
+```
 cat <<EOF | sudo tee /etc/modules-load.d/crio.conf
 overlay
 br_netfilter
 EOF
-
--> 
+```
+```
 cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
 net.bridge.bridge-nf-call-iptables  = 1
 net.ipv4.ip_forward                 = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 EOF
+```
+``` sudo modprobe overlay```
 
--> sudo modprobe overlay
-
--> sudo modprobe br_netfilter
-
--> 
+```sudo modprobe br_netfilter
+```
+```
 cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
 net.bridge.bridge-nf-call-iptables  = 1
 net.ipv4.ip_forward                 = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 EOF
-
--> sudo sysctl --system
+```
+```sudo sysctl --system```
 
 ----------------------------------------------------------------
 Step #4:Install Kubeadm & Kubelet & Kubectl on all Nodes
 
--> sudo apt-get update
+``` sudo apt-get update```
 
--> sudo apt-get install -y apt-transport-https curl
+```sudo apt-get install -y apt-transport-https curl```
 
--> curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+```curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -```
 
--> sudo nano /etc/apt/sources.list.d/kubernetes.list (add the below line) 
+(add the below line) 
+```
+ sudo nano /etc/apt/sources.list.d/kubernetes.list 
 	-> deb https://apt.kubernetes.io/ kubernetes-xenial main
+```
 
-
+```
 -> sudo apt-get update
+```
 
--> sudo apt-get install -y kubelet kubeadm kubectl
+``` sudo apt-get install -y kubelet kubeadm kubectl```
 
--> sudo apt-mark hold kubelet kubeadm kubectl
+``` sudo apt-mark hold kubelet kubeadm kubectl```
 
 ------------------------------
 
@@ -102,25 +113,25 @@ Now run the master.sh file  ]
 
 Use the following commands from the output to create the kubeconfig on master node
 
--> mkdir -p $HOME/.kube
+``` mkdir -p $HOME/.kube ```
 
--> sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+```  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config ```
 
--> sudo chown $(id -u):$(id -g) $HOME/.kube/config
+``` sudo chown $(id -u):$(id -g) $HOME/.kube/config ```
 
 To join the worker node command into control plane
 
--> kubectl token create --print-join-command
+``` kubectl token create --print-join-command ```
 
 (copy the output command and paste over in the worker node)
 
--> kubectl get nodes
+``` kubectl get nodes ```
 
--> kubectl get nodes
+ ``` kubectl get nodes ```
 
 Step #5:Deploy Sample Nginx microservice on Kubernetes
 
--> kubectl apply -f nginx-deploy.yml
+``` kubectl apply -f nginx-deploy.yml ```
 Now access the nginx service by using worked node IP and port 32000
 
 
