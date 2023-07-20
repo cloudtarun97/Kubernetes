@@ -126,25 +126,35 @@ Now run the master.sh file  ]
 
 Use the following commands from the output to create the kubeconfig on master node
 
-``` mkdir -p $HOME/.kube ```
+```
+mkdir -p $HOME/.kube
 
-```  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config ```
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 
-``` sudo chown $(id -u):$(id -g) $HOME/.kube/config ```
+sudo chown $(id -u):$(id -g) $HOME/.kube/config 
+ ```
 
 To join the worker node command into control plane
 
-``` kubectl token create --print-join-command ```
+``` 
+kubectl token create --print-join-command
+```
 
 (copy the output command and paste over in the worker node)
 
-``` kubectl get nodes ```
+``` 
+kubectl get nodes
+ ```
 
- ``` kubectl get nodes ```
+ ```
+ kubectl get nodes
+ ```
 
 Step #5:Deploy Sample Nginx microservice on Kubernetes
 
-``` kubectl apply -f nginx-deploy.yml ```
+``` 
+kubectl apply -f nginx-deploy.yml
+ ```
 Now access the nginx service by using worked node IP and port 32000
 
 
