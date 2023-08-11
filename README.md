@@ -112,6 +112,9 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 ------------------------------
 
+ sudo chmod +x common.sh
+./common.sh
+
 Run the ./common.sh file (kubeadm-scripts/scripts) in this location on both master & worker nodes
 
 Now you need to change master.sh file in master node
